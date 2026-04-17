@@ -1,0 +1,14 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9"/>
+      <stop offset="1" stop-color="#10B981"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" rx="42" fill="url(#g1)"/>
+  <circle cx="196" cy="144" r="88" fill="white" fill-opacity="0.14"/>
+  <circle cx="1060" cy="560" r="130" fill="white" fill-opacity="0.12"/>
+  <path d="M240 470L430 280L620 470L810 250L960 390" stroke="white" stroke-opacity="0.82" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="90" y="140" fill="white" font-size="44" font-family="Arial, sans-serif" font-weight="700">Fabriquathon 2026</text>
+  <text x="90" y="206" fill="white" font-size="76" font-family="Arial, sans-serif" font-weight="800">National Hackathon Winner</text>
+</svg>

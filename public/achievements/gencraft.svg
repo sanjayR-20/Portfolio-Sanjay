@@ -1,0 +1,15 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g2" x1="100" y1="20" x2="1150" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FB7185"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" rx="42" fill="url(#g2)"/>
+  <rect x="88" y="116" width="380" height="208" rx="26" fill="white" fill-opacity="0.14"/>
+  <rect x="508" y="376" width="600" height="210" rx="34" fill="white" fill-opacity="0.16"/>
+  <circle cx="950" cy="170" r="92" fill="white" fill-opacity="0.12"/>
+  <text x="122" y="194" fill="white" font-size="62" font-family="Arial, sans-serif" font-weight="800">Gencraft</text>
+  <text x="122" y="258" fill="white" font-size="48" font-family="Arial, sans-serif" font-weight="700">Appathon 2025</text>
+  <text x="122" y="552" fill="white" font-size="84" font-family="Arial, sans-serif" font-weight="800">Winner</text>
+</svg>

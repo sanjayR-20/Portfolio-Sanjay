@@ -1,0 +1,15 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g5" x1="80" y1="40" x2="1100" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" rx="42" fill="url(#g5)"/>
+  <rect x="96" y="96" width="1008" height="508" rx="34" fill="white" fill-opacity="0.12"/>
+  <path d="M332 468C442 316 544 350 622 460C700 568 830 560 924 460" stroke="white" stroke-opacity="0.86" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="486" cy="298" r="28" fill="white" fill-opacity="0.75"/>
+  <text x="136" y="220" fill="white" font-size="72" font-family="Arial, sans-serif" font-weight="800">Stork's Quill</text>
+  <text x="136" y="302" fill="white" font-size="48" font-family="Arial, sans-serif" font-weight="700">Freshmen Engineering Magazine</text>
+  <text x="136" y="548" fill="white" font-size="58" font-family="Arial, sans-serif" font-weight="700">Published in First Year</text>
+</svg>
