@@ -35,7 +35,7 @@ const LightPillar = ({
   noiseIntensity = 0.5,
   mixBlendMode = 'screen',
   pillarRotation = 0,
-  quality = 'high'
+  quality = 'medium'
 }: LightPillarProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
@@ -48,6 +48,18 @@ const LightPillar = ({
   const timeRef = useRef(0);
   const rotationSpeedRef = useRef(rotationSpeed);
   const [webGLSupported, setWebGLSupported] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), {
+      rootMargin: '160px'
+    });
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const canvas = document.createElement('canvas');
@@ -58,7 +70,7 @@ const LightPillar = ({
   }, []);
 
   useEffect(() => {
-    if (!containerRef.current || !webGLSupported) return;
+    if (!containerRef.current || !webGLSupported || !isVisible) return;
 
     const container = containerRef.current;
     const width = container.clientWidth;
@@ -261,7 +273,7 @@ const LightPillar = ({
     }
 
     let lastTime = performance.now();
-    const targetFPS = effectiveQuality === 'low' ? 30 : 60;
+    const targetFPS = effectiveQuality === 'high' ? 45 : 30;
     const frameTime = 1000 / targetFPS;
 
     const animate = (currentTime: number) => {
@@ -269,7 +281,7 @@ const LightPillar = ({
 
       const deltaTime = currentTime - lastTime;
 
-      if (deltaTime >= frameTime) {
+      if (!document.hidden && deltaTime >= frameTime) {
         timeRef.current += 0.016 * rotationSpeedRef.current;
         const t = timeRef.current;
         materialRef.current.uniforms.uTime.value = t;
@@ -325,7 +337,7 @@ const LightPillar = ({
       geometryRef.current = null;
       rafRef.current = null;
     };
-  }, [webGLSupported, quality]);
+  }, [webGLSupported, quality, isVisible]);
 
   useEffect(() => {
     rotationSpeedRef.current = rotationSpeed;

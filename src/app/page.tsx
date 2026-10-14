@@ -1,4 +1,4 @@
-import SplashCursor from '@/components/ui/SplashCursor';
+import DeferredSplashCursor from '@/components/ui/DeferredSplashCursor';
 import PillNav from '@/components/ui/PillNav';
 import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/sections/AboutSection';
@@ -29,17 +29,7 @@ const Home = async () => {
 
   return (
     <main className="min-h-screen">
-      <SplashCursor
-        RAINBOW_MODE={false}
-        COLOR="#67e8f9"
-        COLOR_INTENSITY={0.08}
-        OVERLAY_OPACITY={0.14}
-        SPLAT_FORCE={3200}
-        SPLAT_RADIUS={0.14}
-        DENSITY_DISSIPATION={4.5}
-        VELOCITY_DISSIPATION={2.7}
-        COLOR_UPDATE_SPEED={6}
-      />
+      <DeferredSplashCursor />
       <PillNav items={navItems} />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-6 sm:px-6 lg:px-8">

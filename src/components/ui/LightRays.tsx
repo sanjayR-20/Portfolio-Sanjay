@@ -97,7 +97,7 @@ const LightRays = ({
       if (!containerRef.current) return;
 
       const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, 2),
+        dpr: 1,
         alpha: true
       });
       rendererRef.current = renderer;
@@ -246,7 +246,7 @@ void main() {
       const updatePlacement = () => {
         if (!containerRef.current || !renderer) return;
 
-        renderer.dpr = Math.min(window.devicePixelRatio, 2);
+        renderer.dpr = 1;
 
         const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
         renderer.setSize(wCSS, hCSS);
@@ -262,10 +262,20 @@ void main() {
         uniforms.rayDir.value = dir;
       };
 
+      let lastFrameTime = 0;
+      const frameInterval = 1000 / 30;
+
       const loop = (t) => {
         if (!rendererRef.current || !uniformsRef.current || !meshRef.current) {
           return;
         }
+
+        if (document.hidden || t - lastFrameTime < frameInterval) {
+          animationIdRef.current = requestAnimationFrame(loop);
+          return;
+        }
+
+        lastFrameTime = t;
 
         uniforms.iTime.value = t * 0.001;
 

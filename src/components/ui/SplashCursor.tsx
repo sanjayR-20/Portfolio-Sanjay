@@ -684,8 +684,18 @@ function SplashCursor({
     let lastUpdateTime = Date.now();
     let colorUpdateTimer = 0.0;
 
-    function updateFrame() {
+    let lastFrameTime = 0;
+    const frameInterval = 1000 / 30;
+
+    function updateFrame(timestamp = performance.now()) {
       if (!isActive) return;
+
+      if (document.hidden || timestamp - lastFrameTime < frameInterval) {
+        animationFrameId.current = requestAnimationFrame(updateFrame);
+        return;
+      }
+
+      lastFrameTime = timestamp;
       const dt = calcDeltaTime();
       if (resizeCanvas()) initFramebuffers();
       updateColors(dt);
@@ -977,7 +987,9 @@ function SplashCursor({
     }
 
     function scaleByPixelRatio(input) {
-      const pixelRatio = window.devicePixelRatio || 1;
+      // The cursor is a translucent overlay. Rendering it above 1x DPR is not
+      // perceptible here, but multiplies the fluid simulation's GPU workload.
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1);
       return Math.floor(input * pixelRatio);
     }
 

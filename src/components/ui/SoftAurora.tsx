@@ -1,7 +1,7 @@
 'use client';
 
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './SoftAurora.css';
 
 type SoftAuroraProps = {
@@ -180,11 +180,23 @@ export default function SoftAurora({
   mouseInfluence = 0.25
 }: SoftAuroraProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (!containerRef.current) return;
     const container = containerRef.current;
-    const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
+    if (!container) return;
+
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), {
+      rootMargin: '160px'
+    });
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current || !isVisible) return;
+    const container = containerRef.current;
+    const renderer = new Renderer({ alpha: true, premultipliedAlpha: false, dpr: 1 });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
 
@@ -251,8 +263,12 @@ export default function SoftAurora({
     let animationFrameId = 0;
     const uniforms = program.uniforms as Record<string, { value: unknown }>;
 
+    let lastFrameTime = 0;
+    const frameInterval = 1000 / 30;
     const update = (time: number) => {
       animationFrameId = requestAnimationFrame(update);
+      if (document.hidden || time - lastFrameTime < frameInterval) return;
+      lastFrameTime = time;
       uniforms.uTime.value = time * 0.001;
 
       if (enableMouseInteraction) {
@@ -297,7 +313,8 @@ export default function SoftAurora({
     layerOffset,
     colorSpeed,
     enableMouseInteraction,
-    mouseInfluence
+    mouseInfluence,
+    isVisible
   ]);
 
   return <div ref={containerRef} className="soft-aurora-container" />;
